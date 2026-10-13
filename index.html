@@ -15,12 +15,12 @@
     box-sizing:border-box;
 }
 
-html{
-    height:100%;
+html,body{
+    margin:0;
+    padding:0;
 }
 
 body{
-    margin:0;
     font-family:Georgia,serif;
     background:linear-gradient(135deg,#fffaf0,#fdf2d0,#fff7e6);
 
@@ -34,12 +34,12 @@ body{
     overflow-x:hidden;
     overflow-y:auto;
 
-    padding:20px;
+    padding:12px;
 }
 
 .card{
     width:min(92%,700px);
-    background:#fff;
+    background:white;
     padding:22px;
     border-radius:28px;
     text-align:center;
@@ -69,21 +69,20 @@ body{
     object-fit:cover;
     border-radius:50%;
     border:6px solid var(--gold);
-    box-shadow:0 0 25px rgba(212,175,55,.4);
+    box-shadow:0 0 25px rgba(212,175,55,.35);
 }
 
 .progress{
     color:var(--gold-dark);
     font-weight:bold;
-    margin-top:15px;
 }
 
 button{
     border:none;
     border-radius:12px;
+    cursor:pointer;
     padding:14px 24px;
     font-size:1rem;
-    cursor:pointer;
 }
 
 .next,
@@ -114,44 +113,52 @@ button{
 }
 
 #funnyText{
+    min-height:45px;
     color:var(--gold-dark);
     font-weight:bold;
-    min-height:42px;
 }
 
 .hearts{
     position:fixed;
     inset:0;
-    pointer-events:none;
     overflow:hidden;
+    pointer-events:none;
+    z-index:9999;
 }
 
 .heart{
     position:absolute;
-    font-size:28px;
-    animation:float 4s linear forwards;
+    animation:heartFloat linear forwards;
+    will-change:transform;
 }
 
-@keyframes float{
-    from{
-        transform:translateY(0);
+@keyframes heartFloat{
+
+    0%{
+        opacity:0;
+        transform:
+        translate(0,0)
+        rotate(0deg)
+        scale(1);
+    }
+
+    10%{
         opacity:1;
     }
-    to{
-        transform:translateY(-500px);
+
+    100%{
         opacity:0;
+        transform:
+        translate(var(--driftX), calc(-1 * var(--travel)))
+        rotate(var(--rotation))
+        scale(1.3);
     }
 }
 
 @media (max-width:600px){
 
-    body{
-        padding:12px;
-    }
-
     .card{
         padding:18px;
-        margin-top:10px;
         margin-bottom:90px;
     }
 
@@ -162,21 +169,15 @@ button{
 
     h1{
         font-size:1.5rem;
-        margin-bottom:10px;
     }
 
     h2{
         font-size:1.2rem;
     }
 
-    p{
-        margin:8px 0;
-    }
-
     button{
         width:100%;
-        padding:12px 16px;
-        font-size:1rem;
+        padding:12px 18px;
     }
 }
 </style>
@@ -188,6 +189,7 @@ button{
 
 <!-- Seite 1 -->
 <div class="card page active" id="page1">
+
     <h1 class="h">💛 Eine Nachricht von Emilia 💛</h1>
 
     <p>Hallo Andrea,</p>
@@ -201,10 +203,12 @@ button{
     <button class="next" onclick="nextPage(1,2)">
         Ja, ich bin bereit 😊
     </button>
+
 </div>
 
 <!-- Seite 2 -->
 <div class="card page" id="page2">
+
     <h1 class="h">🤫 Noch eine Frage</h1>
 
     <p>Kannst du ein Geheimnis für dich behalten?</p>
@@ -214,27 +218,37 @@ button{
     <button class="next" onclick="nextPage(2,3)">
         Natürlich! 😇
     </button>
+
 </div>
 
 <!-- Seite 3 -->
 <div class="card page" id="page3">
+
     <h1 class="h">👀 Perfekt ...</h1>
 
-    <img src="IMG_0233[1].JPG" class="photo"jetzt einmal ganz genau an.</p>
-    <p>Ich habe nämlich sehr lange über diese Frage nachgedacht.</p>
+    <img src="IMGPG
+
+    <p>Dann schau mich jetzt einmal ganz genau an.</p>
+
+    <p>
+        Ich habe nämlich sehr lange über diese
+        Frage nachgedacht.
+    </p>
 
     <p class="progress">▓▓▓░░ 60%</p>
 
     <button class="next" onclick="nextPage(3,4)">
         Ich bin gespannt ❤️
     </button>
+
 </div>
 
 <!-- Seite 4 -->
 <div class="card page" id="page4">
+
     <h1 class="h">💛 Eine ganz wichtige Frage 💛</h1>
 
-    <img src="IMG_0233[1].JPG" class="photo" alt="Emilia"></p>
+    <img src="IMG_0233[1].JPG" class="photondrea,</strong></p>
 
     <p>
         Mama und Papa haben gesagt,
@@ -258,30 +272,35 @@ button{
     <button id="yes">
         Ja, natürlich! ❤️
     </button>
+
 </div>
 
-<button id="no" style="display:none;">Nein</button>
+<button id="no" style="display:none;">
+    Nein
+</button>
 
 <!-- Erfolg -->
 <div class="card" id="success">
+
     <h1 class="h">🎉 JAAAA! 🎉</h1>
 
-    <img src="IMGPG
+    IMG_0233[1].JPG
 
     <p>Liebe Andrea,</p>
 
     <p>
-        danke, dass du meine Taufpatin wirst. ❤️
+        Danke, dass du meine Taufpatin wirst. ❤️
     </p>
 
     <p>
-        Ich freue mich schon auf viele gemeinsame
-        Abenteuer.
+        Ich freue mich schon auf viele
+        gemeinsame Abenteuer.
     </p>
 
     <p>
-        <strong>Dejan, Mirjana & Emilia</strong>
+        <strong>Dejan, Mirjana &amp; Emilia</strong>
     </p>
+
 </div>
 
 <script>
@@ -332,7 +351,7 @@ const messages = [
 
 function flee(pointerX,pointerY){
 
-    if(document.getElementById("page4").classList.contains("active") === false){
+    if(!document.getElementById("page4").classList.contains("active")){
         return;
     }
 
@@ -365,9 +384,7 @@ function flee(pointerX,pointerY){
 
         escapeCount++;
 
-        const funnyText=document.getElementById("funnyText");
-
-        funnyText.textContent =
+        document.getElementById("funnyText").textContent =
             messages[Math.min(
                 escapeCount-1,
                 messages.length-1
@@ -381,7 +398,7 @@ document.addEventListener("mousemove",(e)=>{
 
 document.addEventListener("touchmove",(e)=>{
 
-    const touch=e.touches[0];
+    const touch = e.touches[0];
 
     flee(
         touch.clientX,
@@ -391,10 +408,11 @@ document.addEventListener("touchmove",(e)=>{
 },{passive:true});
 
 noBtn.addEventListener("touchstart",(e)=>{
+
     e.preventDefault();
 
-    x=Math.random()*(window.innerWidth-120);
-    y=Math.random()*(window.innerHeight-100);
+    x = Math.random() * (window.innerWidth - 120);
+    y = Math.random() * (window.innerHeight - 120);
 
     updateNoPosition();
 });
@@ -408,57 +426,49 @@ document.getElementById("yes").addEventListener("click",()=>{
 
     for(let i=0;i<80;i++){
 
-    const heart = document.createElement("div");
+        const heart=document.createElement("div");
 
-    heart.className = "heart";
+        heart.className="heart";
 
-    heart.innerHTML =
-        Math.random() > 0.5
-        ? "💛"
-        : "❤️";
+        heart.innerHTML=
+            Math.random()>0.5
+            ? "💛"
+            : "❤️";
 
-    // Zufällige Position
-    heart.style.left =
-        Math.random() * 100 + "vw";
+        heart.style.left =
+            Math.random()*100 + "vw";
 
-    heart.style.top =
-        (50 + Math.random() * 40) + "vh";
+        heart.style.top =
+            (40 + Math.random()*50) + "vh";
 
-    // Unterschiedliche Größen
-    const size =
-        20 + Math.random() * 80;
+        const size =
+            20 + Math.random()*90;
 
-    heart.style.fontSize =
-        size + "px";
+        heart.style.fontSize =
+            size + "px";
 
-    // Unterschiedliche Flugrichtungen
-    heart.style.setProperty(
-        "--driftX",
-        (-250 + Math.random()*500) + "px"
-    );
+        heart.style.setProperty(
+            "--driftX",
+            (-300 + Math.random()*600) + "px"
+        );
 
-    heart.style.setProperty(
-        "--travel",
-        (500 + Math.random()*400) + "px"
-    );
+        heart.style.setProperty(
+            "--travel",
+            (500 + Math.random()*500) + "px"
+        );
 
-    heart.style.setProperty(
-        "--rotation",
-        (-180 + Math.random()*360) + "deg"
-    );
+        heart.style.setProperty(
+            "--rotation",
+            (-180 + Math.random()*360) + "deg"
+        );
 
-    // Unterschiedliche Dauer
-    heart.style.animationDuration =
-        (3 + Math.random()*4) + "s";
+        heart.style.animationDuration =
+            (3 + Math.random()*4) + "s";
 
-    // Unterschiedlicher Startzeitpunkt
-    heart.style.animationDelay =
-        (Math.random()*2) + "s";
-
-    document
-        .getElementById("hearts")
-        .appendChild(heart);
-}
+        document
+            .getElementById("hearts")
+            .appendChild(heart);
+    }
 });
 
 </script>

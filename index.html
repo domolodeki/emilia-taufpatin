@@ -406,20 +406,59 @@ document.getElementById("yes").addEventListener("click",()=>{
 
     document.getElementById("success").style.display="block";
 
-    for(let i=0;i<50;i++){
+    for(let i=0;i<80;i++){
 
-        const heart=document.createElement("div");
+    const heart = document.createElement("div");
 
-        heart.className="heart";
-        heart.innerHTML=Math.random()>0.5 ? "💛" : "❤️";
+    heart.className = "heart";
 
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.bottom="0";
+    heart.innerHTML =
+        Math.random() > 0.5
+        ? "💛"
+        : "❤️";
 
-        document
-            .getElementById("hearts")
-            .appendChild(heart);
-    }
+    // Zufällige Position
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.top =
+        (50 + Math.random() * 40) + "vh";
+
+    // Unterschiedliche Größen
+    const size =
+        20 + Math.random() * 80;
+
+    heart.style.fontSize =
+        size + "px";
+
+    // Unterschiedliche Flugrichtungen
+    heart.style.setProperty(
+        "--driftX",
+        (-250 + Math.random()*500) + "px"
+    );
+
+    heart.style.setProperty(
+        "--travel",
+        (500 + Math.random()*400) + "px"
+    );
+
+    heart.style.setProperty(
+        "--rotation",
+        (-180 + Math.random()*360) + "deg"
+    );
+
+    // Unterschiedliche Dauer
+    heart.style.animationDuration =
+        (3 + Math.random()*4) + "s";
+
+    // Unterschiedlicher Startzeitpunkt
+    heart.style.animationDelay =
+        (Math.random()*2) + "s";
+
+    document
+        .getElementById("hearts")
+        .appendChild(heart);
+}
 });
 
 </script>

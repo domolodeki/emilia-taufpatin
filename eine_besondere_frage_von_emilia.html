@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#fffaf0">
+    <meta name="description" content="Eine ganz besondere Frage von Emilia an Andrea.">
+    <title>Eine besondere Frage von Emilia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="preload" href="IMG_0233.JPG" as="image">
+    <link rel="icon" href="IMG_0233.JPG" type="image/jpeg">
+
+    <style>
+        :root{
+            --gold:#d4af37;
+            --gold-dark:#9a7107;
+            --gold-light:#f2de97;
+            --cream:#fffaf0;
+            --text:#463d32;
+            --green:#4caf50;
+            --green-dark:#3f9343;
+            --red:#d9534f;
+        }
+
+        *{
+            box-sizing:border-box;
+        }
+
+        html,body{
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            font-family:'Nunito',sans-serif;
+            color:var(--text);
+            background:linear-gradient(135deg,#fffaf0 0%,#fdf2d0 50%,#fff7e6 100%);
+            min-height:100vh;
+            min-height:100dvh;
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+            overflow-x:hidden;
+            overflow-y:auto;
+            padding:12px;
+            position:relative;
+        }
+
+        body::before{
+            content:"💛   ♡   🌸   ♡   💛   ♡   🌸   ♡   💛   ♡   🌸";
+            position:fixed;
+            inset:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            font-size:clamp(34px,7vw,70px);
+            line-height:2.4;
+            letter-spacing:18px;
+            opacity:.035;
+            transform:rotate(-12deg) scale(1.25);
+            pointer-events:none;
+            user-select:none;
+        }
+
+        .card{
+            width:min(96%,760px);
+            background:rgba(255,255,255,.96);
+            padding:28px;
+            border-radius:28px;
+            text-align:center;
+            box-shadow:0 12px 30px rgba(158,116,10,.16);
+            border:2px solid var(--gold);
+            position:relative;
+            margin-top:20px;
+            margin-bottom:90px;
+            z-index:1;
+        }
+
+        .card::before{
+            content:"";
+            position:absolute;
+            inset:9px;
+            border:1px solid rgba(212,175,55,.55);
+            border-radius:19px;
+            pointer-events:none;
+        }
+
+        .card > *{
+            position:relative;
+            z-index:1;
+        }
+
+        .h{
+            font-family:'Cormorant Garamond',serif;
+            color:var(--gold-dark);
+            line-height:1.12;
+			white-space:nowrap;
+        }
+
+        h1{
+            font-size:clamp(1.7rem,4.5vw,2.3rem);
+            margin:8px 0 20px;
+        }
+
+        h2{
+            font-size:clamp(1.3rem,3.5vw,1.8rem);
+            margin:22px 0 16px;
+        }
+
+        p{
+            font-size:1.05rem;
+            line-height:1.65;
+            margin:12px auto;
+            max-width:600px;
+        }
+
+        .photo{
+            width:200px;
+            height:200px;
+            object-fit:cover;
+            border-radius:50%;
+            border:5px solid var(--gold);
+            box-shadow:0 8px 25px rgba(158,116,10,.24);
+            margin:4px 0 10px;
+        }
+
+        .progress-wrap{
+            margin:24px auto;
+            max-width:420px;
+        }
+
+        .progress-label{
+            display:flex;
+            justify-content:space-between;
+            gap:12px;
+            margin-bottom:7px;
+            color:var(--gold-dark);
+            font-size:.9rem;
+            font-weight:700;
+        }
+
+        .progressbar{
+            width:100%;
+            height:12px;
+            background:#f2eee4;
+            border-radius:999px;
+            overflow:hidden;
+            box-shadow:inset 0 1px 3px rgba(0,0,0,.08);
+        }
+
+        .fill{
+            height:100%;
+            width:var(--progress);
+            background:linear-gradient(90deg,var(--gold-dark),#f0cf60,var(--gold));
+            border-radius:inherit;
+            transition:width .5s ease;
+        }
+
+        button{
+            border:none;
+            border-radius:14px;
+            cursor:pointer;
+            padding:14px 24px;
+            font-family:'Nunito',sans-serif;
+            font-size:1rem;
+            transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+            -webkit-tap-highlight-color:transparent;
+        }
+
+        button:focus-visible{
+            outline:3px solid rgba(212,175,55,.55);
+            outline-offset:4px;
+        }
+
+        button:hover{
+            transform:translateY(-2px);
+        }
+
+        button:active{
+            transform:translateY(0);
+        }
+
+        .next,
+        #yes{
+            background:linear-gradient(135deg,var(--green),var(--green-dark));
+            color:white;
+            font-weight:700;
+            box-shadow:0 7px 18px rgba(76,175,80,.25);
+        }
+
+        #no{
+            position:fixed;
+            background:var(--red);
+            color:white;
+            z-index:1000;
+            width:auto;
+            min-width:80px;
+            max-width:95px;
+            white-space:nowrap;
+            transition:left .08s linear,top .08s linear,transform .18s ease;
+            box-shadow:0 7px 18px rgba(217,83,79,.25);
+        }
+
+        .page,
+        #success{
+            display:none;
+        }
+
+        .page.active,
+        #success.active{
+            display:block;
+            animation:fadeIn .48s ease both;
+        }
+
+        #page4{
+            padding-bottom:110px;
+        }
+
+        #funnyText{
+            min-height:50px;
+            color:var(--gold-dark);
+            font-weight:700;
+        }
+
+        .question-intro{
+            margin-top:24px;
+            font-style:italic;
+        }
+
+        #success h1{
+            font-size:clamp(1.8rem,4.5vw,2.5rem);
+            margin-bottom:14px;
+        }
+
+        .hearts{
+            position:fixed;
+            inset:0;
+            overflow:hidden;
+            pointer-events:none;
+            z-index:9999;
+        }
+
+        .heart{
+            position:absolute;
+            animation:heartFloat linear forwards;
+            will-change:transform,opacity;
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(12px) scale(.985);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0) scale(1);
+            }
+        }
+
+        @keyframes heartFloat{
+            0%{
+                opacity:0;
+                transform:translate(0,0) rotate(0deg) scale(.85);
+            }
+            10%{
+                opacity:1;
+            }
+            100%{
+                opacity:0;
+                transform:translate(var(--driftX),calc(-1 * var(--travel))) rotate(var(--rotation)) scale(1.3);
+            }
+        }
+
+        @media (max-width:600px){
+            body{
+                padding:10px;
+            }
+
+            .card{
+                width:96%;
+                padding:22px 18px;
+                margin-top:12px;
+                margin-bottom:95px;
+                border-radius:24px;
+            }
+
+            .photo{
+                width:180px;
+                height:180px;
+            }
+
+            p{
+                font-size:1rem;
+                line-height:1.55;
+            }
+
+            .next,
+            #yes{
+                width:100%;
+                padding:13px 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce){
+            *,*::before,*::after{
+                scroll-behavior:auto !important;
+                animation-duration:.01ms !important;
+                animation-iteration-count:1 !important;
+                transition-duration:.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+    <main>
+        <section class="card page active" id="page1" aria-labelledby="title1">
+            <h1 class="h" id="title1">💛 Eine Nachricht von Emilia 💛</h1>
+            <p>Hallo Andrea,</p>
+            <p>ich habe heute etwas ganz Besonderes zu fragen.</p>
+            <p>Aber bevor wir beginnen ...</p>
+            <h2>Bist du bereit für eine kleine Überraschung?</h2>
+
+            <div class="progress-wrap" aria-label="Fortschritt: 20 Prozent">
+                <div class="progress-label"><span>Kleine Überraschung</span><span>20 %</span></div>
+                <div class="progressbar"><div class="fill" style="--progress:20%"></div></div>
+            </div>
+
+            <button class="next" type="button" onclick="nextPage(1,2)">Ja, ich bin bereit 😊</button>
+        </section>
+
+        <section class="card page" id="page2" aria-labelledby="title2">
+            <h1 class="h" id="title2">🤫 Noch eine Frage</h1>
+            <p>Kannst du ein Geheimnis für dich behalten?</p>
+
+            <div class="progress-wrap" aria-label="Fortschritt: 40 Prozent">
+                <div class="progress-label"><span>Das Geheimnis rückt näher</span><span>40 %</span></div>
+                <div class="progressbar"><div class="fill" style="--progress:40%"></div></div>
+            </div>
+
+            <button class="next" type="button" onclick="nextPage(2,3)">Natürlich! 😇</button>
+        </section>
+
+        <section class="card page" id="page3" aria-labelledby="title3">
+            <h1 class="h" id="title3">👀 Perfekt ...</h1>
+            <img src="IMG_0233.JPG" class="photo" alt="Emilia lächelt in die Kamera" width="220" height="220">
+            <p>Dann schau mich jetzt einmal ganz genau an.</p>
+            <p>Ich habe nämlich sehr lange über diese Frage nachgedacht.</p>
+
+            <div class="progress-wrap" aria-label="Fortschritt: 60 Prozent">
+                <div class="progress-label"><span>Fast am Ziel</span><span>60 %</span></div>
+                <div class="progressbar"><div class="fill" style="--progress:60%"></div></div>
+            </div>
+
+            <button class="next" type="button" onclick="nextPage(3,4)">Ich bin gespannt ❤️</button>
+        </section>
+
+        <section class="card page" id="page4" aria-labelledby="title4">
+            <h1 class="h" id="title4">💛 Eine ganz wichtige Frage 💛</h1>
+            <img src="IMG_0233.JPG" class="photo" alt="Emilia lächelt in die Kamera" width="220" height="220">
+
+            <p>Mama und Papa haben gesagt, dass ich mir eine ganz besondere Taufpatin aussuchen darf.</p>
+            <p><strong>Bevor du auf „Nein“ klickst:</strong><br>Ich beobachte alles. 👀</p>
+            <p class="question-intro">Und deshalb habe ich nur eine einzige Frage ...</p>
+
+            <h2 class="h">🌷 Würdest du meine Taufpatin werden? 🌷</h2>
+
+            <p id="funnyText" aria-live="polite">Ich habe da schon jemanden im Sinn ... 🥰</p>
+            <button id="yes" type="button">Ja, natürlich! ❤️</button>
+        </section>
+
+        <button id="no" type="button" style="display:none;" aria-label="Nein, lieber nicht">Nein</button>
+
+        <section class="card" id="success" aria-labelledby="successTitle">
+            <h1 class="h" id="successTitle">🎉 JAAAA! 🎉</h1>
+            <img src="IMG_0233.JPG" class="photo" alt="Emilia freut sich über ihre neue Taufpatin" width="220" height="220">
+            <p>Liebe Andrea,</p>
+            <p>Danke, dass du meine Taufpatin wirst. ❤️</p>
+            <p>Ich freue mich schon auf viele gemeinsame Abenteuer.</p>
+            <p><strong>Dejan, Mirjana, Laura &amp; Emilia</strong></p>
+        </section>
+    </main>
+
+    <script>
+        const noBtn = document.getElementById("no");
+        const yesBtn = document.getElementById("yes");
+        const funnyText = document.getElementById("funnyText");
+        const heartsContainer = document.getElementById("hearts");
+
+        let x = 0;
+        let y = 0;
+        let escapeCount = 0;
+
+        const messages = [
+            "Hmmm ... 🤔",
+            "Andrea, das war knapp. 😄",
+            "Ich glaube, du suchst den falschen Button. 👀",
+            "Der Nein-Button hat Angst bekommen. 😂",
+            "Das zählt eigentlich schon als Ja. 😇",
+            "Ich beobachte dich ganz genau. 👀"
+        ];
+
+        function nextPage(current,next){
+            document.getElementById("page" + current).classList.remove("active");
+            document.getElementById("page" + next).classList.add("active");
+
+            window.scrollTo({top:0,behavior:"smooth"});
+
+            if(next === 4){
+                noBtn.style.display = "block";
+                requestAnimationFrame(positionNoButtonBelowYes);
+            }
+        }
+
+        function updateNoPosition(){
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+
+        function clampNoPosition(){
+            const rect = noBtn.getBoundingClientRect();
+            const padding = 10;
+
+            x = Math.max(padding,Math.min(window.innerWidth - rect.width - padding,x));
+            y = Math.max(padding,Math.min(window.innerHeight - rect.height - padding,y));
+        }
+
+        function positionNoButtonBelowYes(){
+            const yesRect = yesBtn.getBoundingClientRect();
+            const noRect = noBtn.getBoundingClientRect();
+
+            x = yesRect.left + (yesRect.width / 2) - (noRect.width / 2);
+            y = yesRect.bottom + 14;
+
+            clampNoPosition();
+            updateNoPosition();
+        }
+
+        function flee(pointerX,pointerY){
+            if(!document.getElementById("page4").classList.contains("active")) return;
+
+            const rect = noBtn.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const dx = centerX - pointerX;
+            const dy = centerY - pointerY;
+            const distance = Math.hypot(dx,dy);
+
+            if(distance < 140){
+                x += (dx / (distance || 1)) * 28;
+                y += (dy / (distance || 1)) * 28;
+
+                clampNoPosition();
+                updateNoPosition();
+
+                escapeCount++;
+                funnyText.textContent = messages[Math.min(escapeCount - 1,messages.length - 1)];
+            }
+        }
+
+        function moveNoButtonRandomly(){
+            const rect = noBtn.getBoundingClientRect();
+            const padding = 12;
+            const maxX = Math.max(padding,window.innerWidth - rect.width - padding);
+            const maxY = Math.max(padding,window.innerHeight - rect.height - padding);
+
+            x = padding + Math.random() * (maxX - padding);
+            y = padding + Math.random() * (maxY - padding);
+
+            updateNoPosition();
+
+            escapeCount++;
+            funnyText.textContent = messages[Math.min(escapeCount - 1,messages.length - 1)];
+        }
+
+        document.addEventListener("mousemove",event => {
+            flee(event.clientX,event.clientY);
+        });
+
+        document.addEventListener("touchmove",event => {
+            if(event.touches[0]){
+                flee(event.touches[0].clientX,event.touches[0].clientY);
+            }
+        },{passive:true});
+
+        noBtn.addEventListener("mouseenter",event => {
+            flee(event.clientX,event.clientY);
+        });
+
+        noBtn.addEventListener("touchstart",event => {
+            event.preventDefault();
+            moveNoButtonRandomly();
+        },{passive:false});
+
+        noBtn.addEventListener("click",moveNoButtonRandomly);
+
+        window.addEventListener("resize",() => {
+            if(document.getElementById("page4").classList.contains("active")){
+                positionNoButtonBelowYes();
+            }
+        });
+
+        yesBtn.addEventListener("click",() => {
+            document.getElementById("page4").classList.remove("active");
+            noBtn.style.display = "none";
+
+            const success = document.getElementById("success");
+            success.classList.add("active");
+            window.scrollTo({top:0,behavior:"smooth"});
+
+            const icons = ["💛","❤️","✨","🌸","🎉"];
+
+            for(let i = 0;i < 80;i++){
+                const heart = document.createElement("div");
+                const duration = 3 + Math.random() * 4;
+
+                heart.className = "heart";
+                heart.textContent = icons[Math.floor(Math.random() * icons.length)];
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.top = (40 + Math.random() * 50) + "vh";
+                heart.style.fontSize = (20 + Math.random() * 70) + "px";
+                heart.style.setProperty("--driftX",(-300 + Math.random() * 600) + "px");
+                heart.style.setProperty("--travel",(500 + Math.random() * 500) + "px");
+                heart.style.setProperty("--rotation",(-180 + Math.random() * 360) + "deg");
+                heart.style.animationDuration = duration + "s";
+                heart.style.animationDelay = Math.random() * .6 + "s";
+
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart.remove(),(duration + 1) * 1000);
+            }
+        });
+    </script>
+</body>
+</html>

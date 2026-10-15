@@ -106,6 +106,9 @@ button{
     min-width:80px;
     max-width:95px;
     white-space:nowrap;
+
+    transition:left .08s linear, top .08s linear;
+
 }
 
 .page,
@@ -491,6 +494,10 @@ document.getElementById("yes").addEventListener("click",()=>{
         document
             .getElementById("hearts")
             .appendChild(heart);
+
+        setTimeout(() => {
+    heart.remove();
+}, 7000);
     }
 });
 

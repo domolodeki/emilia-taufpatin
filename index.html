@@ -191,6 +191,7 @@
             color:white;
             font-weight:700;
             box-shadow:0 7px 18px rgba(76,175,80,.25);
+			animation:pulse 2.5s infinite;
         }
 
         #no{
@@ -261,7 +262,15 @@
                 transform:translateY(0) scale(1);
             }
         }
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+    }
 
+    50%{
+        transform:scale(1.04);
+    }
+}
         @keyframes heartFloat{
             0%{
                 opacity:0;
@@ -352,7 +361,8 @@
             <h1 class="h" id="title3">👀 Perfekt ...</h1>
             <img src="IMG_0233.JPG" class="photo" alt="Emilia lächelt in die Kamera" width="220" height="220">
             <p>Dann schau mich jetzt einmal ganz genau an.</p>
-            <p>Ich habe nämlich sehr lange über diese Frage nachgedacht.</p>
+			<p>Denn es gibt jemanden, den ich ganz besonders mag.</p>
+            <p>Und genau dieser Person möchte ich heute eine wichtige Frage stellen.</p>
 
             <div class="progress-wrap" aria-label="Fortschritt: 60 Prozent">
                 <div class="progress-label"><span>Fast am Ziel</span><span>60 %</span></div>

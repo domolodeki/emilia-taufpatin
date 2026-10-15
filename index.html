@@ -325,6 +325,7 @@ function nextPage(current,next){
 
     if(next===4){
         noBtn.style.display="block";
+        positionNoButtonBelowYes();
     }
 }
 
@@ -342,8 +343,20 @@ if(window.innerWidth < 768){
 }
 
 function updateNoPosition(){
-    noBtn.style.left = x + "px";
+     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
+}
+
+function positionNoButtonBelowYes() {
+
+    const yesBtn = document.getElementById("yes");
+    const yesRect = yesBtn.getBoundingClientRect();
+    const noRect = noBtn.getBoundingClientRect();
+
+    x = yesRect.left + (yesRect.width / 2) - (noRect.width / 2);
+    y = yesRect.bottom + 15;
+
+    updateNoPosition();
 }
 
 updateNoPosition();
